@@ -1,23 +1,31 @@
 <template>
-  <div>
-    <codemirror
-      v-model="code"
-      placeholder="Code goes here..."
-      :style="{ height: '400px' }"
-      :autofocus="true"
-      :indent-with-tab="true"
-      :tab-size="2"
-      :extensions="extensions"
-    />
+  <div class="home">
+    <n-h1 class="h1 margin">文件</n-h1>
+      <n-list class="margin" hoverable clickable>
+        <n-list-item v-for="(item,index) in data" :key="index">
+          <n-thing :title="item.name" title-extra="extra" description="description" />
+        </n-list-item>
+      </n-list>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { Codemirror } from 'vue-codemirror'
-import { javascript } from '@codemirror/lang-javascript'
-import { oneDark } from '@codemirror/theme-one-dark'
+<script setup lang="ts">
+import { GetList } from "../api";
+import { ref, onMounted } from "vue"
+import { useRoute } from "vue-router"
+const route = useRoute()
 
-const code = ref(`console.log('Hello, world!')`)
-const extensions = [javascript(), oneDark]
+
+const data = ref([])
+
+onMounted(async () => {
+  const request = await GetList('/')
+  data.value = request.data.data
+})
 </script>
+
+<style lang="less" scoped>
+.h1 {
+  margin-top: 20px;
+}
+</style>
