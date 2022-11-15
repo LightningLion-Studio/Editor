@@ -1,0 +1,7 @@
+.github
+.hoppscotch
+.vscode
+node_modules
+dist
+lib
+bin
