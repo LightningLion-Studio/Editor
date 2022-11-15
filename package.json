@@ -2,6 +2,7 @@
   "name": "my-node-app-2",
   "version": "1.0.0",
   "scripts": {
+    "start": "node index.js",
     "format": "prettier --config .prettierrc.js --write ./"
   },
   "dependencies": {
