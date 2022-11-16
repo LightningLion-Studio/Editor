@@ -1,15 +1,7 @@
 <template>
   <div class="example">
-    <toolbar
-      :config="config"
-      :themes="Object.keys(themes)"
-      :languages="Object.keys(languages)"
-      @language="ensureLanguageCode"
-    />
-    <div class="divider"></div>
     <editor
       :config="config"
-      :theme="currentTheme"
       :language="currentLangCode.language"
       :code="currentLangCode.code"
     />
