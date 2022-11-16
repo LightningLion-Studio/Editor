@@ -12,13 +12,12 @@
 </template>
 
 <script setup lang="ts" allowJs="true">
-import { ref, defineProps } from "vue";
+import { ref, defineProps, onMounted } from "vue";
 import { Codemirror } from "vue-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { GetFile } from "../api"
 import { useRoute } from "vue-router"
-import { onMounted } from "vue"
 
 const props = defineProps({
   size: Number,

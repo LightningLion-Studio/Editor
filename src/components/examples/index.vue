@@ -91,8 +91,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-
   .example {
     .divider {
       height: 1px;
