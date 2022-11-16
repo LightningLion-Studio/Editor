@@ -3,11 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script src="https://cdn.jsdelivr.net/npm/eruda-dom"></script>
+    <script>
+    eruda.init()
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Zero Editor</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <style>
+      :root {
+        background: #242424;
+      }
+      </style>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
