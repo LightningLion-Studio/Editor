@@ -20,7 +20,6 @@
   import { defineComponent, reactive, computed, shallowRef, onBeforeMount } from 'vue'
   import languages from './languages'
   import { oneDark } from "@codemirror/theme-one-dark";
-  import Toolbar from './toolbar.vue'
   import Editor from './editor.vue'
 
   export default defineComponent({
@@ -28,7 +27,6 @@
     title: 'Example Source Code',
     url: import.meta.url,
     components: {
-      Toolbar,
       Editor
     },
     setup() {
@@ -44,9 +42,6 @@
 
       const langCodeMap = reactive(new Map<string, { code: string; language: () => any }>())
       const currentLangCode = computed(() => langCodeMap.get(config.language)!)
-      const currentTheme = computed(() => {
-        return config.theme !== 'default' ? themes[config.theme] : void 0
-      })
 
       const ensureLanguageCode = async (targetLanguage: string) => {
         config.language = targetLanguage
@@ -67,9 +62,7 @@
 
       return {
         config,
-        themes,
         languages,
-        currentTheme,
         currentLangCode,
         ensureLanguageCode
       }
