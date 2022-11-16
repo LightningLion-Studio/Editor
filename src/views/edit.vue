@@ -1,15 +1,15 @@
 <template>
   <div id="edit">
-    <Editor :size="18" />
+    <Editor :size="14" />
   </div>
 </template>
 
 <script setup lang="ts" allowJs="true">
-import Editor from "../components/editor.vue";
+import Editor from "../components/editor.vue"
 </script>
 
 <style lang="less" scoped>
-.edit {
+#edit {
   height: 100%;
 }
 </style>

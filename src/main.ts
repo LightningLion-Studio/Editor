@@ -4,6 +4,8 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import naive from "naive-ui";
+import format from "./utils/format"
+Date.prototype.format = format
 
 import "./assets/main.less";
 

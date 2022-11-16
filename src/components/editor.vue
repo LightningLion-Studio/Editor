@@ -7,6 +7,7 @@
     :indent-with-tab="true"
     :tab-size="2"
     :extensions="extensions"
+    class="editor"
   />
 </template>
 
@@ -15,14 +16,25 @@ import { ref, defineProps } from "vue";
 import { Codemirror } from "vue-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { GetFile } from "../api"
+import { useRoute } from "vue-router"
+import { onMounted } from "vue"
 
 const props = defineProps({
   size: Number,
-});
+})
+const route = useRoute()
 
-const code = ref(`console.log('Hello, world!')`);
+const code = ref(`console.log('Hello, world!')`)
+
+onMounted( async () => {
+  const request = await GetFile(route.query.path)
+  console.log(request)
+  code.value = request.data.data
+})
+
 const style = ref({
-  height: "100%",
+  minHeight: "400px",
   fontSize: props.size + "px",
 });
 const extensions = [javascript(), oneDark];

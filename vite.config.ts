@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/apis': {
-        target: 'http://api.editor.xhhzs.cn', // 
+        target: 'http://101.33.221.245:8888', // 
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/apis/, '')
       },
