@@ -16,10 +16,12 @@ import Codemirror from "codemirror-editor-vue3";
 import "codemirror/mode/javascript/javascript.js"
 import "codemirror/mode/htmlmixed/htmlmixed.js"
 import "codemirror/theme/monokai.css"
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute()
 
-import { ref } from "vue";
 const code = ref(``)
-let cmOptions = {
+let cmOptions = ref({
     mode: "javascript", // 语言模式
     theme: "monokai", // 主题
     lineNumbers: true, // 显示行号
@@ -27,7 +29,11 @@ let cmOptions = {
     indentUnit: 2, // 智能缩进单位为4个空格长度
     foldGutter: true, // 启用行槽中的代码折叠
     styleActiveLine: true, // 显示选中行的样式
-}
+})
+
+onMounted(() => {
+
+})
 </script>
 
 <style lang="less">
