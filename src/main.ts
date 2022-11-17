@@ -6,6 +6,8 @@ import router from "./router";
 import naive from "naive-ui";
 import format from "./utils/format"
 Date.prototype.format = format
+import 'vfonts/Lato.css'
+import 'vfonts/FiraCode.css'
 
 import "./assets/main.less";
 

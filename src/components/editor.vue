@@ -4,7 +4,7 @@
     :options="cmOptions"
     border
     placeholder="测试 placeholder"
-    :height="200"
+    height="100vh"
     id="editor"
   />
 </template>
@@ -40,7 +40,8 @@ export default {
 
 <style lang="less">
 #editor {
-  font-family: "JetBrains Mono";
+  font-family: "JetBrains Mono",v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 18px;
+  border: none;
 }
 </style>
