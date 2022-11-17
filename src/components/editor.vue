@@ -18,6 +18,7 @@ import "codemirror/mode/htmlmixed/htmlmixed.js"
 import "codemirror/theme/monokai.css"
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { GetFile } from "../api"
 const route = useRoute()
 
 const code = ref(``)
@@ -31,8 +32,10 @@ let cmOptions = ref({
     styleActiveLine: true, // 显示选中行的样式
 })
 
-onMounted(() => {
-
+onMounted(async () => {
+  const data = await GetFile(route.query.path)
+  console.log(data)
+  code.value = data.data.data
 })
 </script>
 
