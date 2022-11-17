@@ -6,6 +6,7 @@
     placeholder="测试 placeholder"
     :height="200"
     @change="onChange"
+    id="editor"
   />
 </template>
 
@@ -37,3 +38,14 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url("/fonts/JetBrainsMono-Regular.woff");
+}
+#editor {
+  font-family: "JetBrains Mono";
+  font-size: 18px;
+}
+</style>
