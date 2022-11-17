@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts" allowJs="true">
-import Editor from "../components/examples/index.vue"
+import Editor from "../components/editor.vue"
 </script>
 
 <style lang="less" scoped>

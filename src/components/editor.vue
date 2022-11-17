@@ -1,40 +1,40 @@
 <template>
-  <codemirror
-    v-model="code"
-    placeholder="输入内容..."
-    :style="style"
-    :autofocus="true"
-    :indent-with-tab="true"
-    :tab-size="2"
-    :extensions="extensions"
-    class="editor"
+  <Codemirror
+    v-model:value="code"
+    :options="cmOptions"
+    border
+    placeholder="测试 placeholder"
+    :height="200"
+    @change="onChange"
   />
 </template>
 
-<script setup lang="ts" allowJs="true">
-import { ref, defineProps, onMounted } from "vue";
-import { Codemirror } from "vue-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
-import { oneDark } from "@codemirror/theme-one-dark";
-import { GetFile } from "../api"
-import { useRoute } from "vue-router"
+<script>
+import Codemirror from "codemirror-editor-vue3";
 
-const props = defineProps({
-  size: Number,
-})
-const route = useRoute()
+// language
+import "codemirror/mode/javascript/javascript.js"
+import "codemirror/mode/htmlmixed/htmlmixed.js"
+import "codemirror/theme/monokai.css"
 
-const code = ref(`console.log('Hello, world!')`)
+import { ref } from "vue";
+export default {
+  components: { Codemirror },
+  setup() {
+    const code = ref(``)
+    let cmOptions = {
+        mode: "javascript", // 语言模式
+        theme: "monokai", // 主题
+        lineNumbers: true, // 显示行号
+        smartIndent: true, // 智能缩进
+        indentUnit: 2, // 智能缩进单位为4个空格长度
+        foldGutter: true, // 启用行槽中的代码折叠
+        styleActiveLine: true, // 显示选中行的样式
+      },
 
-onMounted( async () => {
-  const request = await GetFile(route.query.path)
-  console.log(request)
-  code.value = request.data.data
-})
-
-const style = ref({
-  minHeight: "400px",
-  fontSize: props.size + "px",
-});
-const extensions = [javascript(), oneDark];
+    return {
+      code, cmOptions
+    }
+  },
+};
 </script>
