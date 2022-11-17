@@ -23,19 +23,15 @@ import { ref, onMounted } from "vue"
 import { useCounterStore } from '../stores/counter'
 import { useRouter } from "vue-router"
 import FolderRound from "@vicons/material/FolderRound"
-
 const counter = useCounterStore()
 const router = useRouter()
-
 const data = ref([])
 const show = ref(true)
-
 // 获取数据
 const getter = async (path) => {
   let request = await GetList(path)
   return request
 }
-
 // 前往目录
 const go = async (path) => {
   if (path[12].type == 'folder') {
@@ -61,14 +57,12 @@ const go = async (path) => {
     show.value = false
   }
 }
-
 const req = async () => {
   show.value = true
   let request = await GetList('/')
   data.value = request.data.DIR
   show.value = false
 }
-
 onMounted(req)
 </script>
 

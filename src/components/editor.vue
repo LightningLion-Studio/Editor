@@ -9,7 +9,7 @@
   />
 </template>
 
-<script>
+<script lang="ts">
 import Codemirror from "codemirror-editor-vue3";
 
 // language
@@ -30,8 +30,7 @@ export default {
         indentUnit: 2, // 智能缩进单位为4个空格长度
         foldGutter: true, // 启用行槽中的代码折叠
         styleActiveLine: true, // 显示选中行的样式
-      },
-
+      };
     return {
       code, cmOptions
     }
