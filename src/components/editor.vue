@@ -5,7 +5,6 @@
     border
     placeholder="测试 placeholder"
     :height="200"
-    @change="onChange"
     id="editor"
   />
 </template>
@@ -42,7 +41,9 @@ export default {
 <style lang="less">
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url("/fonts/JetBrainsMono-Regular.woff");
+  src: url("/fonts/JetBrainsMono-Regular.woff") format('woff'),
+       url("/fonts/JetBrainsMono-Regular.woff2") format('woff2'),
+       url("/fonts/JetBrainsMono-Regular-2.ttf") format('ttf'),
 }
 #editor {
   font-family: "JetBrains Mono";
