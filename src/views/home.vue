@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="home">
     <n-h1 class="h1 margin">文件</n-h1>
     <n-text class="margin">
@@ -7,6 +7,9 @@
     <n-space class="margin">
       <n-button @click="showModal = true" type="primary">
         新建文件
+      </n-button>
+      <n-button @click="back">
+        后退
       </n-button>
     </n-space>
     <n-spin :show="show">
@@ -76,6 +79,14 @@ const go = async (path) => {
     })
     show.value = false
   }
+}
+//后退
+const back = async () => {
+  show.value = true
+  counter.back()
+  const get = await getter(counter.count)
+  data.value = get.data.DIR
+  show.value = false
 }
 
 const showModal = ref(false)

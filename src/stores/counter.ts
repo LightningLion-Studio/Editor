@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useCounterStore = defineStore('counter', {
+export const useCounterStore:any = defineStore('counter', {
   state: () => {
     return {
       count: '/',
@@ -23,9 +23,8 @@ export const useCounterStore = defineStore('counter', {
       console.log(this.history)
     },
     back() {
-      const before:any = this.history[this.history.length - 2]
-      delete this.history[this.history.length - 1]
-      this.count = this.history[before]
+      this.history.splice(this.history.length - 1,1)
+      this.count = this.history[this.history.length - 1]
       console.log(this.history)
     }
   },
