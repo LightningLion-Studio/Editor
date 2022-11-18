@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <n-button @click="save">
-      保存
-    </n-button>
+  <div style="height: 100%">
+    <div class="tool">
+      <n-button @click="save">
+        保存
+      </n-button>
+    </div>
     <Codemirror
       v-model:value="code"
       :options="cmOptions"
       placeholder="测试 placeholder"
-      height="100vh"
+      height="100%"
       id="editor"
     />
   </div>
@@ -69,9 +71,16 @@ onMounted(async () => {
 </script>
 
 <style lang="less">
-#editor {
+#editor .CodeMirror * {
   font-family: "JetBrains Mono",v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 18px;
   border: none;
+}
+.tool {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  z-index: 99999;
 }
 </style>
