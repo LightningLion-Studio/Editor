@@ -21,5 +21,22 @@ app.use(pinia);
 app.use(router);
 app.use(naive);
 
+document.addEventListener("gesturestart", function (event) {
+	event.preventDefault()
+})
+
+document.addEventListener("dblclick", function (event) {
+	event.preventDefault()
+})
+
+var lastTouchEnd = 0;
+document.addEventListener("touchend",function (event) {
+	var now = new Date().getTime();
+	if (now - lastTouchEnd <= 300) {
+		event.preventDefault();
+	}
+	lastTouchEnd = now
+},false)
+
 
 app.mount("#app");
