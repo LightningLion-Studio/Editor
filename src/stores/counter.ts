@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
 
+/*
+ * @ts-ignore
+ */
 export const useCounterStore:any = defineStore('counter', {
   state: () => {
     return {
