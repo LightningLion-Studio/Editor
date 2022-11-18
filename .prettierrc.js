@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   // 末尾不需要逗号 'es5' none
   trailingComma: 'es5',
   // 大括号内的首尾需要空格
