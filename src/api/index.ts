@@ -47,3 +47,41 @@ export async function GetFile(path:any):Promise<any> {
   })
   return data
 }
+
+
+import axios from "axios"
+import md5 from "md5"
+export async function SaveFile(path:any,data:any):Promise<any> {
+  const config = {
+    host: "/apis",
+    token: "899loiW5aLbLIRmWEqQZAw9RDK1c782W"
+  }
+  const time = Math.round(new Date().getTime()/1000).toString()
+  const token = md5(time + md5(config.token))
+  const req = await axios({
+    data: {
+      path,
+      encoding: "utf-8",
+      data,
+      request_time: time,
+      request_token: token,
+    },
+    method: "post",
+    url: "/apis/files?action=SaveFileBody",
+    headers: {
+      	"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+    }
+  })
+  return req
+}
+
+export async function NewFile(path:any):Promise<any> {
+  const data = await request({
+    params: {
+      action: "CreateFile",
+      path
+    },
+    url: "/files"
+  })
+  return data
+}

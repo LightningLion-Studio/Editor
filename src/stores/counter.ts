@@ -28,5 +28,9 @@ export const useCounterStore = defineStore('counter', {
       this.count = this.history[before]
       console.log(this.history)
     }
-  }
+  },
+  persist: {
+    enabled: true,
+    storage: localStorage,
+  },
 })
