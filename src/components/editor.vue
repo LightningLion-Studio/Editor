@@ -1,9 +1,10 @@
 <template>
   <div style="height: 100%">
     <div class="tool">
-      <n-button @click="save">
-        保存
-      </n-button>
+        <n-button type="primary" @click="save">
+          保存
+        </n-button>
+        <n-slider v-model:value="fontSize" :step="1" />
     </div>
     <Codemirror
       v-model:value="code"
@@ -11,13 +12,17 @@
       placeholder="测试 placeholder"
       height="100%"
       id="editor"
+      :style="{
+        '--fontSize': fontSize + 'px'
+      }"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import Codemirror from "codemirror-editor-vue3";
+import Codemirror from "codemirror-editor-vue3"
 // language
+import { useEditing } from "../stores/editing"
 import "codemirror/mode/javascript/javascript.js"
 import "codemirror/mode/htmlmixed/htmlmixed.js"
 import "codemirror/mode/markdown/markdown.js"
@@ -28,6 +33,10 @@ import { GetFile, SaveFile } from "../api"
 import { useMessage } from "naive-ui"
 const route = useRoute()
 const message = useMessage()
+const editing = useEditing()
+
+// 字体大小
+const fontSize = ref(editing.fontSize)
 
 const code = ref(``)
 let cmOptions:any = ref({
@@ -35,9 +44,10 @@ let cmOptions:any = ref({
     theme: "monokai", // 主题
     lineNumbers: true, // 显示行号
     smartIndent: true, // 智能缩进
-    indentUnit: 2, // 智能缩进单位为4个空格长度
+    tabSize: 2, // 智能缩进单位为4个空格长度
     foldGutter: true, // 启用行槽中的代码折叠
-    styleActiveLine: true, // 显示选中行的样式
+    styleActiveLine: true, // 显示选中行的样式,
+    lineWrapping: true, // 自动换行
 })
 
 const parser = () => {
@@ -73,14 +83,16 @@ onMounted(async () => {
 <style lang="less">
 #editor .CodeMirror * {
   font-family: "JetBrains Mono",v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 18px;
-  border: none;
+  font-size: var(--fontSize);
 }
 .tool {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: #000;
-  z-index: 99999;
+  background: #242424;
+  z-index: 999;
+  padding: 5px;
+  display: flex;
+  align-items: center;
 }
 </style>
