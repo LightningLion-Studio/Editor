@@ -1,5 +1,5 @@
 <template>
-    <Editor :size="14" />
+  <Editor id="edit" />
 </template>
 
 <script setup lang="ts" allowJs="true">
@@ -8,6 +8,7 @@ import Editor from "../components/editor.vue"
 
 <style lang="less">
 #edit {
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 </style>

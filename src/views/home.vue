@@ -43,7 +43,6 @@ import { ref, onMounted } from "vue"
 import { useCounterStore } from '../stores/counter'
 import { useRouter } from "vue-router"
 import { useDialog } from "naive-ui"
-import FolderRound from "@vicons/material/FolderRound"
 const counter = useCounterStore()
 const router = useRouter()
 const dialog = useDialog()
@@ -81,6 +80,7 @@ const go = async (path) => {
   }
 }
 //后退
+const disab = ref(false)
 const back = async () => {
   show.value = true
   counter.back()

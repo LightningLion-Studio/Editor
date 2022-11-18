@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <n-button @click="save">
-      保存
-    </n-button>
+  <div style="height: 100%">
+    <div class="tool">
+      <n-button @click="save">
+        保存
+      </n-button>
+    </div>
     <Codemirror
       v-model:value="code"
       :options="cmOptions"
       placeholder="测试 placeholder"
-      height="100vh"
+      height="100%"
       id="editor"
     />
   </div>
@@ -18,6 +20,7 @@ import Codemirror from "codemirror-editor-vue3";
 // language
 import "codemirror/mode/javascript/javascript.js"
 import "codemirror/mode/htmlmixed/htmlmixed.js"
+import "codemirror/mode/markdown/markdown.js"
 import "codemirror/theme/monokai.css"
 import { ref, onMounted } from "vue"
 import { useRoute } from "vue-router"
@@ -27,7 +30,7 @@ const route = useRoute()
 const message = useMessage()
 
 const code = ref(``)
-let cmOptions = ref({
+let cmOptions:any = ref({
     mode: null, // 语言模式
     theme: "monokai", // 主题
     lineNumbers: true, // 显示行号
@@ -38,7 +41,7 @@ let cmOptions = ref({
 })
 
 const parser = () => {
-  let path = route.query.path
+  let path:any = route.query.path
   path = path.split('/')
   path = path[path.length - 1]
   if (path.search('.') != -1) {
@@ -57,6 +60,8 @@ const save = async () => {
 onMounted(async () => {
   if (parser() == 'js') {
     cmOptions.value.mode = 'javascript'
+  } else if (parser() == 'md') {
+    cmOptions.value.mode = 'markdown'
   }
   console.log(parser())
   const data = await GetFile(route.query.path)
@@ -66,9 +71,16 @@ onMounted(async () => {
 </script>
 
 <style lang="less">
-#editor {
+#editor .CodeMirror * {
   font-family: "JetBrains Mono",v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 18px;
   border: none;
+}
+.tool {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  z-index: 99999;
 }
 </style>

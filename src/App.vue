@@ -1,6 +1,6 @@
 <template>
   <div id="root">
-    <NConfigProvider :theme="darkTheme">
+    <NConfigProvider :theme="darkTheme" style="height: 100vh">
       <NMessageProvider>
         <n-dialog-provider>
           <router-view />
