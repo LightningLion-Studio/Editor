@@ -33,6 +33,11 @@ export const useCounterStore:any = defineStore('counter', {
   },
   persist: {
     enabled: true,
-    storage: localStorage,
+    strategies: [
+      {
+        paths: ['count','history'],
+        storage: localStorage
+      }
+    ]
   },
 })

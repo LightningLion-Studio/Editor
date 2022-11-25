@@ -42,7 +42,8 @@ import 'codemirror/addon/fold/indent-fold.js';
 import 'codemirror/addon/fold/markdown-fold.js';
 import 'codemirror/addon/fold/comment-fold.js'
 import "codemirror/theme/monokai.css"
-import { ref, onMounted } from "vue"
+// inport "codemirror/addon/edit/closetag.js"
+import { ref, onMounted, watch } from "vue"
 import { useRoute } from "vue-router"
 import { GetFile, SaveFile } from "../api"
 import { useMessage } from "naive-ui"
@@ -52,6 +53,10 @@ const editing = useEditing()
 
 // 字体大小
 const fontSize = ref(editing.fontSize)
+const onUpdate = () => {
+  editing.updateFontSize(fontSize.value)
+}
+watch(fontSize,onUpdate)
 
 const code = ref(``)
 let cmOptions:any = ref({
@@ -97,6 +102,7 @@ onMounted(async () => {
     cmOptions.value.mode = 'vue'
   } else if (parser() == 'html') {
     cmOptions.value.mode = 'text/html'
+    import("codemirror/addon/edit/closetag.js")
   }
   console.log(parser())
   const data = await GetFile(route.query.path)
