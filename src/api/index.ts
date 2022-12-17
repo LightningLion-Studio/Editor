@@ -54,7 +54,7 @@ import md5 from "md5"
 export async function SaveFile(path:any,data:any):Promise<any> {
   const config = {
     host: "/apis",
-    token: "899loiW5aLbLIRmWEqQZAw9RDK1c782W"
+    token: "6dXXHsN8wwEyyOpqjvCcaMySkehmKKvM"
   }
   const time = Math.round(new Date().getTime()/1000).toString()
   const token = md5(time + md5(config.token))

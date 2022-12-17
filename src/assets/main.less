@@ -13,11 +13,6 @@ body {
   padding: 0;
   margin: 0;
 }
-#app,
-#root,
-body {
-  height: 100vh;
-}
 .padding {
   padding: @public;
 }
@@ -27,4 +22,8 @@ body {
 h1 {
   margin: 0;
   padding: 0;
+}
+#editor .CodeMirror * {
+  font-family: "JetBrains Mono",v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: var(--fontSize);
 }

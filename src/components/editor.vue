@@ -26,8 +26,24 @@ import { useEditing } from "../stores/editing"
 import "codemirror/mode/javascript/javascript.js"
 import "codemirror/mode/htmlmixed/htmlmixed.js"
 import "codemirror/mode/markdown/markdown.js"
+import "codemirror/mode/vue/vue.js"
+import 'codemirror/addon/lint/lint.css'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/panda-syntax.css'
+import 'codemirror/mode/javascript/javascript'
+import 'codemirror/addon/lint/json-lint'
+// 折叠代码
+import 'codemirror/addon/fold/foldgutter.css';
+import 'codemirror/addon/fold/foldcode.js';
+import 'codemirror/addon/fold/foldgutter.js';
+import 'codemirror/addon/fold/brace-fold.js';
+import 'codemirror/addon/fold/xml-fold.js';
+import 'codemirror/addon/fold/indent-fold.js';
+import 'codemirror/addon/fold/markdown-fold.js';
+import 'codemirror/addon/fold/comment-fold.js'
 import "codemirror/theme/monokai.css"
-import { ref, onMounted } from "vue"
+// inport "codemirror/addon/edit/closetag.js"
+import { ref, onMounted, watch } from "vue"
 import { useRoute } from "vue-router"
 import { GetFile, SaveFile } from "../api"
 import { useMessage } from "naive-ui"
@@ -37,6 +53,10 @@ const editing = useEditing()
 
 // 字体大小
 const fontSize = ref(editing.fontSize)
+const onUpdate = () => {
+  editing.updateFontSize(fontSize.value)
+}
+watch(fontSize,onUpdate)
 
 const code = ref(``)
 let cmOptions:any = ref({
@@ -70,8 +90,19 @@ const save = async () => {
 onMounted(async () => {
   if (parser() == 'js') {
     cmOptions.value.mode = 'javascript'
+    cmOptions.value.lint = true
   } else if (parser() == 'md') {
     cmOptions.value.mode = 'markdown'
+  } else if (parser() == 'json') {
+    cmOptions.value.mode = 'application/json'
+    cmOptions.value.lint = true
+  } else if (parser() == 'ts') {
+    cmOptions.value.mode = 'javascript'
+  } else if (parser() == 'vue') {
+    cmOptions.value.mode = 'vue'
+  } else if (parser() == 'html') {
+    cmOptions.value.mode = 'text/html'
+    import("codemirror/addon/edit/closetag.js")
   }
   console.log(parser())
   const data = await GetFile(route.query.path)

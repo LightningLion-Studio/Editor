@@ -2,7 +2,7 @@ import axios from "axios"
 import md5 from "md5"
 const config = {
   host: "/apis",
-  token: "899loiW5aLbLIRmWEqQZAw9RDK1c782W"
+  token: "6dXXHsN8wwEyyOpqjvCcaMySkehmKKvM"
 }
 
 

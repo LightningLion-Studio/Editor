@@ -13,6 +13,11 @@ export const useEditing:any = defineStore('editing',{
   },
   persist: {
     enabled: true,
-    storage: localStorage,
+    strategies: [
+      {
+        storage: localStorage,
+        paths: ['fontSize']
+      }
+    ],
   },
 })

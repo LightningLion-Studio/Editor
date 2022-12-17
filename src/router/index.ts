@@ -14,6 +14,14 @@ const router = createRouter({
       component: () => import("../views/edit.vue"),
     },
   ],
-});
+})
+
+router.beforeEach((to, from) => {
+  if (to.path === '/edit') {
+    document.querySelector('body').style = 'height: auto;overflow: hidden'
+  } else {
+    document.querySelector('body').style = 'height: 100vh;overflow: auto'
+  }
+})
 
 export default router;
