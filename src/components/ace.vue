@@ -6,11 +6,20 @@ import { VAceEditor } from 'vue3-ace-editor'
 
 
 import { ref, reactive, onMounted, watch } from "vue"
+import { useEditing } from "../stores/editing"
 import { useRoute } from "vue-router"
 import { GetFile, SaveFile } from "../api"
 import { useMessage } from "naive-ui"
 const route = useRoute()
 const message = useMessage()
+const editing = useEditing()
+
+// 字体大小
+const fontSize = ref(editing.fontSize)
+const onUpdate = () => {
+  editing.updateFontSize(fontSize.value)
+}
+watch(fontSize,onUpdate)
 
 const code = ref('')
 const lang = ref('')
@@ -33,6 +42,7 @@ import html from 'ace-builds/src-noconflict/mode-html_elixir'
 import json from 'ace-builds/src-noconflict/mode-json'
 import css from 'ace-builds/src-noconflict/mode-css'
 import less from 'ace-builds/src-noconflict/mode-less'
+import tools from 'ace-builds/src-noconflict/ext-language_tools'
 
 
 if (parser() === 'ts') {
@@ -73,10 +83,18 @@ const save = async () => {
       v-model:value="code"
       :lang="lang"
       theme="monokai"
-      style="height: 100%;font-size: 14px"
+      class="main"
+      :style="{ height: '100%', fontSize: fontSize + 'px' }"
+      :options="{
+        wrap: 'free',
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+      }"
     />
     <div class="operation">
       <n-button @click="save">保存</n-button>
+      <n-slider v-model:value="fontSize" :step="1" />
     </div>
   </div>
 </template>
@@ -85,12 +103,19 @@ const save = async () => {
 .container {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 95%;
 }
 .operation {
-  position: fixed;
   width: 100%;
-  bottom: 0;
   z-index: 999;
+  background: #242424;
+  bottom: 0;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.main {
+  font-family: "JetBrains Mono",v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 </style>
